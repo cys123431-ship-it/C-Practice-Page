@@ -1,0 +1,10 @@
+{
+  "name": "C Practice Page",
+  "short_name": "C Practice",
+  "description": "태블릿과 휴대용 키보드로 공부하는 C언어 교과서 동반 학습 페이지",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f7f3",
+  "theme_color": "#1f6f4a",
+  "lang": "ko"
+}
