@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#1f6f4a">
+  <meta name="description" content="태블릿과 휴대용 키보드로 공부하는 C언어 연습 페이지">
+  <title>C Practice Page</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <button id="menuBtn" class="icon-btn" aria-label="목차 열기">☰</button>
+    <div class="brand"><strong>C Practice Page</strong><span id="chapterLabel">교과서 기반 학습</span></div>
+    <div class="top-actions"><span id="runtimeStatus" class="status-pill" aria-live="polite">C 실행기 준비 중</span><button id="progressBtn" class="ghost-btn">진도</button></div>
+  </header>
+  <div class="app-shell">
+    <aside id="sidebar" class="sidebar" aria-label="교과서 목차">
+      <div class="sidebar-head"><div><strong>17 Chapters</strong><p>쉽게 풀어쓴 C언어 Express · 개정 4판 기준</p></div><button id="closeMenuBtn" class="icon-btn close-only" aria-label="목차 닫기">×</button></div>
+      <nav id="chapterNav"></nav>
+      <div class="sidebar-foot"><small>PDF 확인: 750쪽 · 찾아보기는 교재 743쪽부터</small></div>
+    </aside>
+    <main id="mainContent" class="main-content">
+      <section class="welcome" id="welcome">
+        <div class="eyebrow">TABLET-FIRST C STUDY</div>
+        <h1>읽고, 직접 치고, 실제로 실행하고, 채점합니다.</h1>
+        <p>별도 IDE 설치 없이 브라우저에서 C 코드를 연습하는 교과서 동반 학습 페이지입니다. 예제는 자유롭게 수정해 실행하고, 연습문제는 실제 C 실행 결과를 테스트 케이스와 비교해 채점합니다.</p>
+        <div class="welcome-actions"><button id="startBtn" class="primary-btn">CHAPTER 01 시작</button><button id="resumeBtn" class="secondary-btn">마지막 학습 이어서</button></div>
+        <div class="feature-grid"><article><strong>예제 직접 입력</strong><span>코드를 보고 수정하며 실행 결과 확인</span></article><article><strong>연습문제 자동 채점</strong><span>정답 코드 모양이 아니라 실행 결과 비교</span></article><article><strong>태블릿 최적화</strong><span>큰 터치 영역, 키보드 중심 입력, 자동 저장</span></article></div>
+      </section>
+      <section id="studyView" class="study-view" hidden>
+        <div class="chapter-hero"><div><div id="chapterEyebrow" class="eyebrow"></div><h1 id="chapterTitle"></h1><p id="chapterSummary"></p></div><div class="chapter-meta"><span id="chapterPages"></span><button id="markChapterBtn" class="secondary-btn">학습 완료 표시</button></div></div>
+        <section class="content-section"><h2>핵심 개념</h2><ul id="keyPoints" class="key-points"></ul></section>
+        <section class="content-section">
+          <div class="section-heading"><div><div class="eyebrow">EXAMPLE</div><h2 id="exampleTitle"></h2></div><span class="badge">채점 없음 · 자유 실습</span></div>
+          <div class="editor-card"><div class="editor-toolbar"><span>example.c</span><div><button id="resetExampleBtn" class="tiny-btn">원래 코드</button><button id="runExampleBtn" class="run-btn">▶ 실행</button></div></div><textarea id="exampleEditor" class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="예제 C 코드"></textarea><div class="console-head">실행 결과</div><pre id="exampleOutput" class="console" aria-live="polite">$ 실행 버튼을 누르세요.</pre></div>
+        </section>
+        <section class="content-section">
+          <div class="section-heading"><div><div class="eyebrow">PRACTICE</div><h2>연습문제</h2></div><span id="exerciseProgress" class="badge"></span></div>
+          <div id="exerciseTabs" class="exercise-tabs" role="tablist"></div>
+          <article class="exercise-card"><div class="exercise-title-row"><div><span id="exerciseNumber" class="badge"></span><h3 id="exerciseTitle"></h3></div><span id="exerciseSolved" class="solve-state"></span></div><p id="exercisePrompt"></p><details class="hint-box"><summary>힌트 보기</summary><p id="exerciseHint"></p></details>
+            <div class="editor-card practice-editor"><div class="editor-toolbar"><span>solution.c</span><div><button id="resetExerciseBtn" class="tiny-btn">초기화</button><button id="runExerciseBtn" class="secondary-btn">▶ 실행만</button><button id="gradeBtn" class="grade-btn">✓ 채점하기</button></div></div><textarea id="exerciseEditor" class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="연습문제 C 코드"></textarea><div class="console-head">테스트 결과</div><div id="gradeResult" class="grade-result" aria-live="polite">코드를 작성한 뒤 채점해 보세요.</div></div>
+          </article>
+        </section>
+        <div class="chapter-footer-nav"><button id="prevChapterBtn" class="secondary-btn">← 이전 장</button><button id="nextChapterBtn" class="primary-btn">다음 장 →</button></div>
+      </section>
+    </main>
+  </div>
+  <dialog id="progressDialog"><form method="dialog"><div class="dialog-head"><div><div class="eyebrow">PROGRESS</div><h2>학습 진도</h2></div><button class="icon-btn" value="close" aria-label="닫기">×</button></div><div id="progressSummary"></div><div id="progressList" class="progress-list"></div><div class="dialog-actions"><button id="resetAllProgressBtn" type="button" class="danger-btn">진도 초기화</button><button value="close" class="primary-btn">닫기</button></div></form></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./chapters.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
