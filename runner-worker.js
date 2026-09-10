@@ -17,6 +17,7 @@ self.onmessage = (event) => {
   let output = "";
   let quietTimer = null;
   let settled = false;
+  let gotOutput = false;
 
   const finish = () => {
     if (settled) return;
@@ -28,11 +29,16 @@ self.onmessage = (event) => {
   try {
     loadRuntime();
     self.picocjs.runC(code, (chunk) => {
+      gotOutput = true;
       output += String(chunk ?? "");
       if (quietTimer) clearTimeout(quietTimer);
-      quietTimer = setTimeout(finish, 180);
+      quietTimer = setTimeout(finish, 220);
     });
-    quietTimer = setTimeout(finish, 1200);
+    // First load on a tablet can take longer. If a program intentionally
+    // prints nothing, resolve after a generous quiet period instead.
+    quietTimer = setTimeout(() => {
+      if (!gotOutput) finish();
+    }, 3500);
   } catch (error) {
     self.postMessage({
       id,
